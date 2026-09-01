@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modanay — Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7F1EC;
+    --ink:#2A211D;
+    --wine:#6B2737;
+    --wine-deep:#4A1B29;
+    --blush:#E9D3C7;
+    --sand:#EFE4D8;
+    --line: rgba(42,33,29,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+  }
+  h1,h2,h3, .display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:78vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: 8vh 8vw 6vh;
+    position:relative;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 15%, rgba(107,39,55,0.10), transparent),
+      var(--cream);
+    border-bottom:1px solid var(--line);
+  }
+  .hero .kicker{
+    font-size:0.95rem;
+    color:var(--wine);
+    font-style:italic;
+    font-family:'Fraunces', serif;
+    margin-bottom:1.2rem;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 9vw, 6.5rem);
+    line-height:0.95;
+    max-width:11ch;
+  }
+  .hero p.lede{
+    margin-top:1.8rem;
+    max-width:46ch;
+    font-size:1.15rem;
+    color:rgba(42,33,29,0.78);
+  }
+  .hero .meta{
+    margin-top:3rem;
+    display:flex;
+    gap:2.5rem;
+    flex-wrap:wrap;
+    font-size:0.92rem;
+    color:rgba(42,33,29,0.65);
+  }
+  .hero .meta strong{color:var(--ink); font-weight:600;}
+
+  /* NAV / CATEGORY JUMP */
+  .catnav{
+    display:flex;
+    gap:0;
+    overflow-x:auto;
+    border-bottom:1px solid var(--line);
+    background:var(--cream);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .catnav a{
+    padding: 1.1rem 1.6rem;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:0.92rem;
+    white-space:nowrap;
+    border-right:1px solid var(--line);
+    opacity:0.6;
+    transition:opacity 0.2s ease, background 0.2s ease;
+  }
+  .catnav a:hover{opacity:1; background:var(--sand);}
+
+  /* CATEGORY SECTIONS */
+  .category{
+    padding: 5.5rem 8vw;
+    border-bottom:1px solid var(--line);
+  }
+  .category:nth-of-type(even){
+    background:var(--sand);
+  }
+  .cat-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:2rem;
+    margin-bottom:3rem;
+    flex-wrap:wrap;
+  }
+  .cat-head h2{
+    font-size:clamp(2rem, 4vw, 2.8rem);
+  }
+  .cat-count{
+    font-size:0.9rem;
+    color:rgba(42,33,29,0.55);
+    padding-bottom:0.4rem;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:2.2rem;
+  }
+  .card{
+    background:var(--cream);
+    border:1px solid var(--line);
+  }
+  .category:nth-of-type(even) .card{
+    background:var(--cream);
+  }
+  .card-img{
+    aspect-ratio:3/4;
+    background:
+      linear-gradient(135deg, var(--blush), var(--sand));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:1.5rem;
+    border-bottom:1px solid var(--line);
+  }
+  .card-img span{
+    font-size:0.82rem;
+    color:var(--wine-deep);
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    line-height:1.4;
+  }
+  .card-body{
+    padding:1.2rem 1.3rem 1.4rem;
+  }
+  .card-body h3{
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:0.4rem;
+  }
+  .price{
+    color:var(--wine);
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+    font-style:italic;
+    margin-bottom:0.8rem;
+  }
+  .sizes{
+    display:flex;
+    gap:0.4rem;
+    flex-wrap:wrap;
+  }
+  .sizes span{
+    border:1px solid var(--line);
+    padding:0.25rem 0.6rem;
+    font-size:0.8rem;
+    color:rgba(42,33,29,0.75);
+  }
+
+  /* FOOTER */
+  footer{
+    padding:4rem 8vw 5rem;
+    background:var(--wine-deep);
+    color:var(--blush);
+  }
+  footer h2{
+    color:var(--cream);
+    font-size:2rem;
+    margin-bottom:1rem;
+  }
+  footer p{
+    max-width:42ch;
+    color:rgba(233,211,199,0.85);
+    margin-bottom:1.8rem;
+  }
+  .social-row{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .social-row a{
+    color:var(--cream);
+    text-decoration:none;
+    border:1px solid rgba(247,241,236,0.35);
+    padding:0.65rem 1.3rem;
+    font-size:0.9rem;
+    transition:background 0.2s ease;
+  }
+  .social-row a:hover{
+    background:rgba(247,241,236,0.12);
+  }
+
+  @media (max-width:600px){
+    .hero{padding:6vh 6vw 5vh;}
+    .category{padding:3.5rem 6vw;}
+    footer{padding:3rem 6vw 4rem;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="kicker">Catálogo de temporada</div>
+  <h1>Modanay</h1>
+  <p class="lede">Ropa para vestir tu día a día con actitud. Piezas seleccionadas, precios claros y tallas disponibles — todo en un solo lugar.</p>
+  <div class="meta">
+    <div><strong>4</strong> categorías</div>
+    <div><strong>Pedidos</strong> por redes sociales</div>
+    <div><strong>Envíos</strong> a todo el país</div>
+  </div>
+</section>
+
+<nav class="catnav">
+  <a href="#camisetas">Camisetas / Blusas</a>
+  <a href="#pantalones">Pantalones / Jeans</a>
+  <a href="#vestidos">Vestidos</a>
+  <a href="#chaquetas">Chaquetas / Abrigos</a>
+</nav>
+
+<!-- ============================================= -->
+<!-- CÓMO AGREGAR UN PRODUCTO:
+     Copia un bloque <div class="card">...</div> completo
+     dentro del <div class="grid"> de la categoría que quieras,
+     y cambia el nombre, precio y tallas.
+     Donde dice "Agrega tu foto aquí" puedes reemplazar
+     el <div class="card-img">...</div> por:
+     <div class="card-img" style="background-image:url('TU-FOTO.jpg'); background-size:cover;"></div>
+================================================== -->
+
+<section class="category" id="camisetas">
+  <div class="cat-head">
+    <h2>Camisetas &amp; Blusas</h2>
+    <div class="cat-count">3 productos</div>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Blusa Manga Volante</h3>
+        <div class="price">$18.00</div>
+        <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Camiseta Oversize Básica</h3>
+        <div class="price">$14.50</div>
+        <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Blusa Cruzada Escote V</h3>
+        <div class="price">$20.00</div>
+        <div class="sizes"><span>M</span><span>L</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="category" id="pantalones">
+  <div class="cat-head">
+    <h2>Pantalones &amp; Jeans</h2>
+    <div class="cat-count">3 productos</div>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Jean Recto Tiro Alto</h3>
+        <div class="price">$28.00</div>
+        <div class="sizes"><span>36</span><span>38</span><span>40</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Pantalón Cargo</h3>
+        <div class="price">$25.00</div>
+        <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Jean Mom Fit</h3>
+        <div class="price">$27.50</div>
+        <div class="sizes"><span>36</span><span>38</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="category" id="vestidos">
+  <div class="cat-head">
+    <h2>Vestidos</h2>
+    <div class="cat-count">2 productos</div>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Vestido Midi Floral</h3>
+        <div class="price">$32.00</div>
+        <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Vestido Ajustado Casual</h3>
+        <div class="price">$26.00</div>
+        <div class="sizes"><span>S</span><span>M</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="category" id="chaquetas">
+  <div class="cat-head">
+    <h2>Chaquetas &amp; Abrigos</h2>
+    <div class="cat-count">2 productos</div>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Chaqueta Jean Clásica</h3>
+        <div class="price">$35.00</div>
+        <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img"><span>Agrega tu foto aquí</span></div>
+      <div class="card-body">
+        <h3>Abrigo Oversize</h3>
+        <div class="price">$42.00</div>
+        <div class="sizes"><span>M</span><span>L</span><span>XL</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <h2>¿Te gustó algo?</h2>
+  <p>Escríbenos por redes sociales para hacer tu pedido — indica el nombre de la prenda y la talla que necesitas.</p>
+  <div class="social-row">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <a href="#">WhatsApp</a>
+  </div>
+</footer>
+
+</body>
+</html>
